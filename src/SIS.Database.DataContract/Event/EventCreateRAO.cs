@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace RedStarter.API.DataContract.Event
+namespace RedStarter.Database.DataContract.Event
 {
-    public class EventCreateRequest
+    public class EventCreateRAO
     {
         public string EventTitle { get; set; }
         public string Information { get; set; }
