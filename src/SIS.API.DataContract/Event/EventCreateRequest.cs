@@ -9,5 +9,6 @@ namespace RedStarter.API.DataContract.Event
     {
         public string EventTitle { get; set; }
         public string Information { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
     }
 }

@@ -95,6 +95,7 @@ namespace RedStarter.API
             {
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new ApplicationMappingProfile());
+                mc.AddProfile(new EventMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
