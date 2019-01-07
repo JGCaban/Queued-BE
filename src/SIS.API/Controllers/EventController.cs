@@ -16,10 +16,12 @@ namespace RedStarter.API.Controllers
     public class EventController : Controller
     {
         private readonly IMapper _mapper;
+        private readonly IEventManager _manager;
 
-        public EventController(IMapper mapper)
+        public EventController(IMapper mapper, IEventManager manager)
         {
             _mapper = mapper;
+            _manager = manager;
         }
 
         [HttpPost]
@@ -27,6 +29,10 @@ namespace RedStarter.API.Controllers
         {
             var dto = _mapper.Map<EventCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
+
+           await _manager.CreateEvent(dto);
+
+            //Pass DTO to Bussiness Layer/Manager
 
             return Ok();
         }
