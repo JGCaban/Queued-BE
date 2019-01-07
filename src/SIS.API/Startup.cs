@@ -15,8 +15,10 @@ using Microsoft.IdentityModel.Tokens;
 using RedStarter.API.MappingProfiles;
 using RedStarter.Business.DataContract.Application.Interfaces;
 using RedStarter.Business.DataContract.Authorization.Interfaces;
+using RedStarter.Business.DataContract.Event;
 using RedStarter.Business.Managers.Application;
 using RedStarter.Business.Managers.Authorization;
+using RedStarter.Business.Managers.Event;
 using RedStarter.Database.Application;
 using RedStarter.Database.Authorization;
 using RedStarter.Database.Contexts;
@@ -108,6 +110,7 @@ namespace RedStarter.API
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IUserApplicationManager, UserApplicationManager>();
+            services.AddScoped<IEventManager, EventManager>();
 
             //======= Swagger =======
             services.AddSwaggerGen(c =>
