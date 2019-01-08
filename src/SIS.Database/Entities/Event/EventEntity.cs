@@ -10,8 +10,15 @@ namespace RedStarter.Database.Entities.Event
         [Key]
         public int EventEntityId { get; set; }
 
+        [Required]
         public string EventTitle { get; set; }
+
         public string Information { get; set; }
+
+        [Required]
+        public int OwnerID { get; set; }
+
+        [Required]
         public DateTimeOffset DateCreated { get; set; }
     }
 }
