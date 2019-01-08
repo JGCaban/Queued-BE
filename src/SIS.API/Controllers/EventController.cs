@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,6 @@ using RedStarter.Business.DataContract.Event;
 
 namespace RedStarter.API.Controllers
 {
-    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class EventController : Controller
@@ -27,14 +27,20 @@ namespace RedStarter.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostEvent(EventCreateRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
             var dto = _mapper.Map<EventCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
+            dto.OwnerID = identityClaimNum;
 
-           await _manager.CreateEvent(dto);
+           if(await _manager.CreateEvent(dto))
+                return StatusCode(201);
 
-            //Pass DTO to Bussiness Layer/Manager
-
-            return Ok();
+            throw new Exception();
         }
     }
 }

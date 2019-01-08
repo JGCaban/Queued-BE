@@ -24,9 +24,11 @@ using RedStarter.Database.Authorization;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.Application;
 using RedStarter.Database.DataContract.Authorization.Interfaces;
+using RedStarter.Database.DataContract.Event;
 using RedStarter.Database.DataContract.Roles.Interfaces;
 using RedStarter.Database.Entities.People;
 using RedStarter.Database.Entities.Roles;
+using RedStarter.Database.Event;
 using RedStarter.Database.Roles;
 using RedStarter.Database.SeedData;
 using Swashbuckle.AspNetCore.Swagger;
@@ -111,6 +113,7 @@ namespace RedStarter.API
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IUserApplicationManager, UserApplicationManager>();
             services.AddScoped<IEventManager, EventManager>();
+            services.AddScoped<IEventRepository, EventRepository>();
 
             //======= Swagger =======
             services.AddSwaggerGen(c =>
