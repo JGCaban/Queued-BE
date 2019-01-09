@@ -19,6 +19,7 @@ namespace RedStarter.Business.Managers.Event
             _repository = repository;
         }
 
+        //CREATE EVENT
         public async Task<bool> CreateEvent(EventCreateDTO dto)
         {
             var rao = _mapper.Map<EventCreateRAO>(dto);
@@ -29,6 +30,7 @@ namespace RedStarter.Business.Managers.Event
             throw new NotImplementedException();
         }
 
+        //GET ALL EVENTS
         public async Task<IEnumerable<EventGetListItemDTO>> GetEvents()
         {
             var rao = await _repository.GetEvents();
@@ -36,5 +38,8 @@ namespace RedStarter.Business.Managers.Event
 
             return dto;
         }
+
+        //GET EVENT BY ID
+
     }
 }
