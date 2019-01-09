@@ -28,5 +28,13 @@ namespace RedStarter.Business.Managers.Event
 
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<EventGetListItemDTO>> GetEvents()
+        {
+            var rao = await _repository.GetEvents();
+            var dto = _mapper.Map<IEnumerable<EventGetListItemDTO>>(rao);
+
+            return dto;
+        }
     }
 }
