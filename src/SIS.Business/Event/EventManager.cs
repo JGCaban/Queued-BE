@@ -40,6 +40,24 @@ namespace RedStarter.Business.Managers.Event
         }
 
         //GET EVENT BY ID
+        public async Task<EventGetListItemDTO> GetEventById(int id)
+        {
+            var rao = await _repository.GetEventById(id);
+            var dto = _mapper.Map<EventGetListItemDTO>(rao);
 
+            return dto;
+        }
+
+        //EDIT EVENT
+        public async Task<bool> EditEvent(EventEditDTO dto)
+        {
+            var rao = _mapper.Map<EventEditRAO>(dto);
+
+            if (await _repository.EditEvent(rao))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
