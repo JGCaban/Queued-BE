@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.Event;
 using RedStarter.Database.Entities.Event;
@@ -23,10 +24,16 @@ namespace RedStarter.Database.Event
         public async Task<bool> CreateEvent(EventCreateRAO rao)
         {
             var entity = _mapper.Map<EventEntity>(rao);
-
-            _context.EventTableAccess.AddAsync(entity);
-
+            await _context.EventTableAccess.AddAsync(entity);
             return await _context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<IEnumerable<EventGetListItemRAO>> GetEvents()
+        {
+            var query = await _context.EventTableAccess.ToArrayAsync();
+            var array = _mapper.Map<IEnumerable<EventGetListItemRAO>>(query);
+
+            return array;
         }
     }
 }

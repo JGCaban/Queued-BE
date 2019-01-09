@@ -42,5 +42,21 @@ namespace RedStarter.API.Controllers
 
             throw new Exception();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEvents()
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var dto = await _manager.GetEvents();
+            var response = _mapper.Map<IEnumerable<EventResponse>>(dto);
+
+            return Ok(response);
+        }
     }
 }
