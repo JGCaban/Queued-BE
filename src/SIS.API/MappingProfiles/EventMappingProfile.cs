@@ -14,13 +14,19 @@ namespace RedStarter.API.MappingProfiles
     {
         public EventMappingProfile()
         {
+            //CREATE EVENT
             CreateMap<EventCreateRequest, EventCreateDTO>();
             CreateMap<EventCreateDTO, EventCreateRAO>();
             CreateMap<EventCreateRAO, EventEntity>();
 
+            //GET EVENT
             CreateMap<EventEntity, EventGetListItemRAO>();
             CreateMap<EventGetListItemRAO, EventGetListItemDTO>();
             CreateMap<EventGetListItemDTO, EventResponse>();
+
+            //EDIT EVENT
+            CreateMap<EventEditRequest, EventEditDTO>();
+            CreateMap<EventEditDTO, EventEditRAO>();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace RedStarter.API.Controllers
             dto.DateCreated = DateTime.Now;
             dto.OwnerID = identityClaimNum;
 
-           if(await _manager.CreateEvent(dto))
+            if (await _manager.CreateEvent(dto))
                 return StatusCode(201);
 
             throw new Exception();
@@ -59,6 +59,42 @@ namespace RedStarter.API.Controllers
             var response = _mapper.Map<IEnumerable<EventResponse>>(dto);
 
             return Ok(response);
+        }
+
+        //GET EVENT BY ID
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEventById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var dto = await _manager.GetEventById(id);
+            var response = _mapper.Map<EventResponse>(dto);
+
+            return Ok(response);
+        }
+
+        //EDIT EVENT (Should be an Admin Role)
+        [HttpPut]
+        public async Task<IActionResult> EditEvent(EventEditRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var dto = _mapper.Map<EventEditDTO>(request);
+
+            if (await _manager.EditEvent(dto))
+            {
+                return StatusCode(201);
+            }
+            throw new Exception();
         }
     }
 }
