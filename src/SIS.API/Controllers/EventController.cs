@@ -24,6 +24,7 @@ namespace RedStarter.API.Controllers
             _manager = manager;
         }
 
+        //CREATE EVENT
         [HttpPost]
         public async Task<IActionResult> PostEvent(EventCreateRequest request)
         {
@@ -43,6 +44,7 @@ namespace RedStarter.API.Controllers
             throw new Exception();
         }
 
+        //GET ALL EVENTS
         [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
