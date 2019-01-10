@@ -53,7 +53,11 @@ namespace RedStarter.Database.Event
         {
             var entity = _context.EventTableAccess.Single(x => x.EventEntityId == rao.EventEntityId);
             entity.EventTitle = rao.EventTitle;
+            entity.TypeOfEvent = rao.TypeOfEvent;
             entity.Information = rao.Information;
+            entity.Location = rao.Location;
+            entity.ExpectedWait = rao.ExpectedWait;
+            entity.Price = rao.Price;
 
             return await _context.SaveChangesAsync() == 1;
         }
