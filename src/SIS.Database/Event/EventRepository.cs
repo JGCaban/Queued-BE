@@ -57,5 +57,14 @@ namespace RedStarter.Database.Event
 
             return await _context.SaveChangesAsync() == 1;
         }
+
+        //DELETE EVENT
+        public async Task<bool> DeleteEvent(int id)
+        {
+            var entity = await _context.EventTableAccess.SingleAsync(x => x.EventEntityId == id);
+            _context.EventTableAccess.Remove(entity);
+
+            return await _context.SaveChangesAsync() == 1;
+;        }
     }
 }

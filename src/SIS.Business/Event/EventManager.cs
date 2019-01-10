@@ -59,5 +59,13 @@ namespace RedStarter.Business.Managers.Event
             }
             return false;
         }
+
+        //DELETE EVENT
+        public async Task<bool> DeleteEvent(int id)
+        {
+            await _repository.DeleteEvent(id);
+
+            return true;
+        }
     }
 }
