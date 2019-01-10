@@ -92,7 +92,18 @@ namespace RedStarter.API.Controllers
 
             if (await _manager.EditEvent(dto))
             {
-                return StatusCode(201);
+                return StatusCode(200);
+            }
+            throw new Exception();
+        }
+
+        //DELETE EVENT (Should be an Admin Role)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEvent(int id)
+        {
+            if (await _manager.DeleteEvent(id))
+            {
+                return StatusCode(200);
             }
             throw new Exception();
         }

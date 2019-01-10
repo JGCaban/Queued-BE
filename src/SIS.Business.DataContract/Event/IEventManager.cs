@@ -11,5 +11,6 @@ namespace RedStarter.Business.DataContract.Event
         Task<IEnumerable<EventGetListItemDTO>> GetEvents();
         Task<EventGetListItemDTO> GetEventById(int id);
         Task<bool> EditEvent(EventEditDTO dto);
+        Task<bool> DeleteEvent(int id);
     }
 }
