@@ -19,6 +19,8 @@ using RedStarter.Business.DataContract.Event;
 using RedStarter.Business.Managers.Application;
 using RedStarter.Business.Managers.Authorization;
 using RedStarter.Business.Managers.Event;
+using RedStarter.Business.DataContract.Person;
+using RedStarter.Business.Managers.Person;
 using RedStarter.Database.Application;
 using RedStarter.Database.Authorization;
 using RedStarter.Database.Contexts;
@@ -29,6 +31,8 @@ using RedStarter.Database.DataContract.Roles.Interfaces;
 using RedStarter.Database.Entities.People;
 using RedStarter.Database.Entities.Roles;
 using RedStarter.Database.Event;
+using RedStarter.Database.DataContract.Person;
+using RedStarter.Database.Person;
 using RedStarter.Database.Roles;
 using RedStarter.Database.SeedData;
 using Swashbuckle.AspNetCore.Swagger;
@@ -100,6 +104,7 @@ namespace RedStarter.API
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new ApplicationMappingProfile());
                 mc.AddProfile(new EventMappingProfile());
+                mc.AddProfile(new PersonMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -114,6 +119,8 @@ namespace RedStarter.API
             services.AddScoped<IUserApplicationManager, UserApplicationManager>();
             services.AddScoped<IEventManager, EventManager>();
             services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IPersonManager, PersonManager>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             //======= Swagger =======
             services.AddSwaggerGen(c =>
