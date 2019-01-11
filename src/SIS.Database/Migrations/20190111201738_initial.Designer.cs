@@ -10,7 +10,7 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20181217153941_initial")]
+    [Migration("20190111201738_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,6 +181,26 @@ namespace RedStarter.Database.Migrations
                     b.ToTable("ExperienceTableAccess");
                 });
 
+            modelBuilder.Entity("RedStarter.Database.Entities.Event.EventEntity", b =>
+                {
+                    b.Property<int>("EventEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<string>("EventTitle")
+                        .IsRequired();
+
+                    b.Property<string>("Information");
+
+                    b.Property<int>("OwnerID");
+
+                    b.HasKey("EventEntityId");
+
+                    b.ToTable("EventTableAccess");
+                });
+
             modelBuilder.Entity("RedStarter.Database.Entities.People.UserEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -231,6 +251,27 @@ namespace RedStarter.Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Entities.Person.PersonEntity", b =>
+                {
+                    b.Property<int>("PersonEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Phone");
+
+                    b.HasKey("PersonEntityId");
+
+                    b.ToTable("PersonTableAccess");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.RoleEntity", b =>

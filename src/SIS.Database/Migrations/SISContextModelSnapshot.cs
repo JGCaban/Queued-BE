@@ -251,6 +251,27 @@ namespace RedStarter.Database.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("RedStarter.Database.Entities.Person.PersonEntity", b =>
+                {
+                    b.Property<int>("PersonEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Phone");
+
+                    b.HasKey("PersonEntityId");
+
+                    b.ToTable("PersonTableAccess");
+                });
+
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.RoleEntity", b =>
                 {
                     b.Property<int>("Id")

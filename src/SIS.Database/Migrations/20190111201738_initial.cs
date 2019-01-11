@@ -112,6 +112,22 @@ namespace RedStarter.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EventTableAccess",
+                columns: table => new
+                {
+                    EventEntityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EventTitle = table.Column<string>(nullable: false),
+                    Information = table.Column<string>(nullable: true),
+                    OwnerID = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventTableAccess", x => x.EventEntityId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ExperienceTableAccess",
                 columns: table => new
                 {
@@ -122,6 +138,22 @@ namespace RedStarter.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExperienceTableAccess", x => x.ApplicationEntityId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonTableAccess",
+                columns: table => new
+                {
+                    PersonEntityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonTableAccess", x => x.PersonEntityId);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,7 +332,13 @@ namespace RedStarter.Database.Migrations
                 name: "EducationTableAccess");
 
             migrationBuilder.DropTable(
+                name: "EventTableAccess");
+
+            migrationBuilder.DropTable(
                 name: "ExperienceTableAccess");
+
+            migrationBuilder.DropTable(
+                name: "PersonTableAccess");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
