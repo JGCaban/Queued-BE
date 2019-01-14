@@ -1,7 +1,9 @@
 ﻿using RedStarter.API.DataContract.Event;
+using RedStarter.Database.Entities.Person;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace RedStarter.Database.Entities.Event
@@ -29,5 +31,9 @@ namespace RedStarter.Database.Entities.Event
         public int OwnerID { get; set; }
         [Required]
         public DateTimeOffset DateCreated { get; set; }
+
+        public virtual PersonEntity Jumper { get; set; }
+        [ForeignKey("PersonEntityId")]
+        public virtual PersonEntity Placer { get; set; }
     }
 }

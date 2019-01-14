@@ -19,9 +19,5 @@ namespace RedStarter.Database.DataContract.Event
         public bool IsExpired { get; set; }
         public DateTimeOffset DateCreated { get; set; }
         public int OwnerID { get; set; }
-
-        //public int PersonEntityID { get; set; }
-        //public virtual Person Jumper { get; set; }
-        //public virtual Person Placer { get; set; }
     }
 }
