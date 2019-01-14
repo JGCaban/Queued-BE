@@ -20,6 +20,7 @@ namespace RedStarter.Business.Managers.Person
         }
 
 
+        //CREATE PERSON
         public async Task<bool> CreatePerson(PersonCreateDTO dto)
         {
             var rao = _mapper.Map<PersonCreateRAO>(dto);
@@ -28,6 +29,44 @@ namespace RedStarter.Business.Managers.Person
             return true;
 
             throw new NotImplementedException();
+        }
+
+        //GET ALL PEOPLE
+        public async Task<IEnumerable<PersonGetListItemDTO>> GetPersons()
+        {
+            var rao = await _repository.GetPersons();
+            var dto = _mapper.Map<IEnumerable<PersonGetListItemDTO>>(rao);
+
+            return dto;
+        }
+
+        //GET PERSON BY ID
+        public async Task<PersonGetListItemDTO> GetPersonById(int id)
+        {
+            var rao = await _repository.GetPersonById(id);
+            var dto = _mapper.Map<PersonGetListItemDTO>(rao);
+
+            return dto;
+        }
+
+        //EDIT PERSON
+        public async Task<bool> EditPerson(PersonEditDTO dto)
+        {
+            var rao = _mapper.Map<PersonEditRAO>(dto);
+
+            if  (await _repository.EditPerson(rao))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //DELETE PERSON
+        public async Task<bool> DeletePerson(int id)
+        {
+            await _repository.DeletePerson(id);
+
+            return true;
         }
     }
 }

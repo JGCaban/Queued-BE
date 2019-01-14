@@ -14,9 +14,19 @@ namespace RedStarter.API.MappingProfiles
     {
         public PersonMappingProfile()
         {
+            //CREATE EVENT
             CreateMap<PersonCreateRequest, PersonCreateDTO>();
             CreateMap<PersonCreateDTO, PersonCreateRAO>();
             CreateMap<PersonCreateRAO, PersonEntity>();
+
+            //GET EVENT
+            CreateMap<PersonEntity, PersonGetListItemRAO>();
+            CreateMap<PersonGetListItemRAO, PersonGetListItemDTO>();
+            CreateMap<PersonGetListItemDTO, PersonResponse>();
         }
+
+            //EDIT EVENT
+            CreateMap<PersonEditRequest, PersonEditDTO>();
+            CreateMap<PersonEditDTO, PersonEditRAO>();
     }
 }

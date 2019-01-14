@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RedStarter.Business.DataContract.Person
+namespace RedStarter.API.DataContract.Person
 {
-    public class PersonCreateDTO
+    public class PersonGetListItemRequest
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
-        public DateTimeOffset DateCreated { get; set; }
-        public int OwnerId { get; set; }
     }
 }
