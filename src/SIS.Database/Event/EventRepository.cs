@@ -56,7 +56,11 @@ namespace RedStarter.Database.Event
             entity.TypeOfEvent = rao.TypeOfEvent;
             entity.Information = rao.Information;
             entity.Location = rao.Location;
-            entity.ExpectedWait = rao.ExpectedWait;
+            entity.StartTime = rao.StartTime;
+            entity.IsAssigned = rao.IsAssigned;
+            entity.IsCompleted = rao.IsCompleted;
+            entity.IsPaid = rao.IsPaid;
+            entity.IsExpired = rao.IsExpired;
             entity.Price = rao.Price;
 
             return await _context.SaveChangesAsync() == 1;

@@ -190,10 +190,15 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("EventTitle")
                         .IsRequired();
 
-                    b.Property<string>("ExpectedWait")
-                        .IsRequired();
-
                     b.Property<string>("Information");
+
+                    b.Property<bool>("IsAssigned");
+
+                    b.Property<bool>("IsCompleted");
+
+                    b.Property<bool>("IsExpired");
+
+                    b.Property<bool>("IsPaid");
 
                     b.Property<string>("Location")
                         .IsRequired();
@@ -201,6 +206,9 @@ namespace RedStarter.Database.Migrations
                     b.Property<int>("OwnerID");
 
                     b.Property<decimal>("Price");
+
+                    b.Property<string>("StartTime")
+                        .IsRequired();
 
                     b.Property<int>("TypeOfEvent");
 
