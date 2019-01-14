@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedStarter.Database.Contexts;
 
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    partial class SISContextModelSnapshot : ModelSnapshot
+    [Migration("20190114201804_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,37 +192,21 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("EventTitle")
                         .IsRequired();
 
+                    b.Property<string>("ExpectedWait")
+                        .IsRequired();
+
                     b.Property<string>("Information");
-
-                    b.Property<bool>("IsAssigned");
-
-                    b.Property<bool>("IsCompleted");
-
-                    b.Property<bool>("IsExpired");
-
-                    b.Property<bool>("IsPaid");
-
-                    b.Property<int?>("JumperPersonEntityId");
 
                     b.Property<string>("Location")
                         .IsRequired();
 
                     b.Property<int>("OwnerID");
 
-                    b.Property<int?>("PersonEntityId");
-
                     b.Property<decimal>("Price");
-
-                    b.Property<string>("StartTime")
-                        .IsRequired();
 
                     b.Property<int>("TypeOfEvent");
 
                     b.HasKey("EventEntityId");
-
-                    b.HasIndex("JumperPersonEntityId");
-
-                    b.HasIndex("PersonEntityId");
 
                     b.ToTable("EventTableAccess");
                 });
@@ -368,17 +354,6 @@ namespace RedStarter.Database.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("RedStarter.Database.Entities.Event.EventEntity", b =>
-                {
-                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Jumper")
-                        .WithMany()
-                        .HasForeignKey("JumperPersonEntityId");
-
-                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Placer")
-                        .WithMany()
-                        .HasForeignKey("PersonEntityId");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.UserRoleEntity", b =>
