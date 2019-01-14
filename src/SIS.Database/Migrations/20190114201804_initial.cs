@@ -117,8 +117,12 @@ namespace RedStarter.Database.Migrations
                 {
                     EventEntityId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TypeOfEvent = table.Column<int>(nullable: false),
                     EventTitle = table.Column<string>(nullable: false),
                     Information = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    ExpectedWait = table.Column<string>(nullable: false),
                     OwnerID = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(nullable: false)
                 },
@@ -149,6 +153,7 @@ namespace RedStarter.Database.Migrations
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>

@@ -10,7 +10,7 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20190111201738_initial")]
+    [Migration("20190114201804_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,9 +192,19 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("EventTitle")
                         .IsRequired();
 
+                    b.Property<string>("ExpectedWait")
+                        .IsRequired();
+
                     b.Property<string>("Information");
 
+                    b.Property<string>("Location")
+                        .IsRequired();
+
                     b.Property<int>("OwnerID");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("TypeOfEvent");
 
                     b.HasKey("EventEntityId");
 
@@ -266,6 +276,8 @@ namespace RedStarter.Database.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired();
+
+                    b.Property<int>("OwnerId");
 
                     b.Property<string>("Phone");
 

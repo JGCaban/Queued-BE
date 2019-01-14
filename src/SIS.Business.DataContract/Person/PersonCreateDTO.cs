@@ -10,6 +10,5 @@ namespace RedStarter.Business.DataContract.Person
         public string LastName { get; set; }
         public string Phone { get; set; }
         public DateTimeOffset DateCreated { get; set; }
-        public int OwnerId { get; set; }
     }
 }

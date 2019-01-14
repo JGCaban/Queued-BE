@@ -275,6 +275,8 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
+                    b.Property<int>("OwnerId");
+
                     b.Property<string>("Phone");
 
                     b.HasKey("PersonEntityId");

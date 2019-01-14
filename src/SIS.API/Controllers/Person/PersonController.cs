@@ -28,7 +28,7 @@ namespace RedStarter.API.Controllers.Person
         [HttpPost]
         public async Task<IActionResult> PostPerson(PersonCreateRequest request)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return StatusCode(400);
             }
@@ -40,8 +40,8 @@ namespace RedStarter.API.Controllers.Person
             var dto = _mapper.Map<PersonCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
 
-            if(await _manager.CreatePerson(dto))
-            return StatusCode(201);
+            if (await _manager.CreatePerson(dto))
+                return StatusCode(201);
 
             throw new Exception();
         }
@@ -64,7 +64,7 @@ namespace RedStarter.API.Controllers.Person
         }
 
         //GET PERSON BY ID
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetPersonById(int id)
         {
             if (!ModelState.IsValid)
