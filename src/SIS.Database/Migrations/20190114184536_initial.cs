@@ -117,8 +117,16 @@ namespace RedStarter.Database.Migrations
                 {
                     EventEntityId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TypeOfEvent = table.Column<int>(nullable: false),
                     EventTitle = table.Column<string>(nullable: false),
                     Information = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    StartTime = table.Column<string>(nullable: false),
+                    IsAssigned = table.Column<bool>(nullable: false),
+                    IsCompleted = table.Column<bool>(nullable: false),
+                    IsPaid = table.Column<bool>(nullable: false),
+                    IsExpired = table.Column<bool>(nullable: false),
                     OwnerID = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTimeOffset>(nullable: false)
                 },
