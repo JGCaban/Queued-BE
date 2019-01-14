@@ -18,5 +18,9 @@ namespace RedStarter.API.DataContract.Event
         public bool IsCompleted { get; set; }
         public bool IsPaid { get; set; }
         public bool IsExpired { get; set; }
+
+        //public int PersonEntityID { get; set; }
+        //public virtual Person Jumper { get; set; }
+        //public virtual Person Placer { get; set; }
     }
 }
