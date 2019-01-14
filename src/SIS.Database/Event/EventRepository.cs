@@ -62,9 +62,6 @@ namespace RedStarter.Database.Event
             entity.IsPaid = rao.IsPaid;
             entity.IsExpired = rao.IsExpired;
             entity.Price = rao.Price;
-            //entity.Jumper = rao.Jumper;
-            //entity.Placer = rao.Placer;
-
             return await _context.SaveChangesAsync() == 1;
         }
 
