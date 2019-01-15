@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedStarter.Database.Contexts;
 
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    partial class SISContextModelSnapshot : ModelSnapshot
+    [Migration("20190115145002_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,12 +216,7 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("StartTime")
                         .IsRequired();
 
-<<<<<<< HEAD
                     b.Property<int>("TypeOfEvent");
-=======
-                    b.Property<string>("TypeOfEvent")
-                        .IsRequired();
->>>>>>> userRoles
 
                     b.HasKey("EventEntityId");
 

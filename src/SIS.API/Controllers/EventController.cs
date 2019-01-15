@@ -78,7 +78,8 @@ namespace RedStarter.API.Controllers
             return Ok(response);
         }
 
-        //EDIT EVENT (Should be an Admin Role)
+
+        //EDIT EVENT
         [HttpPut]
         public async Task<IActionResult> EditEvent(EventEditRequest request)
         {
@@ -97,8 +98,9 @@ namespace RedStarter.API.Controllers
             throw new Exception();
         }
 
-        //DELETE EVENT (Should be an Admin Role)
+        //DELETE EVENT
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
             if (await _manager.DeleteEvent(id))
