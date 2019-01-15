@@ -214,12 +214,8 @@ namespace RedStarter.Database.Migrations
                     b.Property<string>("StartTime")
                         .IsRequired();
 
-<<<<<<< HEAD
-                    b.Property<int>("TypeOfEvent");
-=======
                     b.Property<string>("TypeOfEvent")
                         .IsRequired();
->>>>>>> userRoles
 
                     b.HasKey("EventEntityId");
 
