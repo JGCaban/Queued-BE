@@ -13,7 +13,7 @@ namespace RedStarter.Database.Entities.Event
         [Key]
         public int EventEntityId { get; set; }
         [Required]
-        public EventType TypeOfEvent { get; set; }
+        public string TypeOfEvent { get; set; }
         [Required]
         public string EventTitle { get; set; }
         public string Information { get; set; }

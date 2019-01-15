@@ -9,7 +9,7 @@ namespace RedStarter.Database.DataContract.Event
     {
         public int EventEntityId { get; set; }
         public string EventTitle { get; set; }
-        public EventType TypeOfEvent { get; set; }
+        public string TypeOfEvent { get; set; }
         public string Information { get; set; }
         public string Location { get; set; }
         public string StartTime { get; set; }

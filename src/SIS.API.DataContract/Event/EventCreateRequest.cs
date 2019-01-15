@@ -5,11 +5,10 @@ using System.Text;
 
 namespace RedStarter.API.DataContract.Event
 {
-    public enum EventType { Sporting=1, Amusement, Product, Movie, Restaurant }
     public class EventCreateRequest
     {
         public string EventTitle { get; set; }
-        public EventType TypeOfEvent { get; set; }
+        public string TypeOfEvent { get; set; }
         public string Information { get; set; }
         public string Location { get; set; }
         public string StartTime { get; set; }

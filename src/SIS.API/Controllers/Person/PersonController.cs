@@ -80,8 +80,9 @@ namespace RedStarter.API.Controllers.Person
             return Ok(response);
         }
 
-        //EDIT PERSON (Should be an Admin Role)
+        //EDIT PERSON
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditPerson(PersonEditRequest request)
         {
             if (!ModelState.IsValid)
@@ -100,8 +101,9 @@ namespace RedStarter.API.Controllers.Person
             throw new Exception();
         }
 
-        //DELETE PERSON (Should be an Admin Role)
+        //DELETE PERSON
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
             if (await _manager.DeletePerson(id))
