@@ -10,8 +10,8 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20190114184536_initial")]
-    partial class initial
+    [Migration("20190115153033_initialMigrationZach")]
+    partial class initialMigrationZach
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -202,10 +202,14 @@ namespace RedStarter.Database.Migrations
 
                     b.Property<bool>("IsPaid");
 
+                    b.Property<int?>("JumperPersonEntityId");
+
                     b.Property<string>("Location")
                         .IsRequired();
 
                     b.Property<int>("OwnerID");
+
+                    b.Property<int?>("PersonEntityId");
 
                     b.Property<decimal>("Price");
 
@@ -215,6 +219,10 @@ namespace RedStarter.Database.Migrations
                     b.Property<int>("TypeOfEvent");
 
                     b.HasKey("EventEntityId");
+
+                    b.HasIndex("JumperPersonEntityId");
+
+                    b.HasIndex("PersonEntityId");
 
                     b.ToTable("EventTableAccess");
                 });
@@ -284,6 +292,8 @@ namespace RedStarter.Database.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired();
+
+                    b.Property<int>("OwnerId");
 
                     b.Property<string>("Phone");
 
@@ -360,6 +370,17 @@ namespace RedStarter.Database.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Entities.Event.EventEntity", b =>
+                {
+                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Jumper")
+                        .WithMany()
+                        .HasForeignKey("JumperPersonEntityId");
+
+                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Placer")
+                        .WithMany()
+                        .HasForeignKey("PersonEntityId");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.UserRoleEntity", b =>
