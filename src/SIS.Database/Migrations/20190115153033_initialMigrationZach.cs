@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RedStarter.Database.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialMigrationZach : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,6 +125,23 @@ namespace RedStarter.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PersonTableAccess",
+                columns: table => new
+                {
+                    PersonEntityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonTableAccess", x => x.PersonEntityId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -230,6 +247,44 @@ namespace RedStarter.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EventTableAccess",
+                columns: table => new
+                {
+                    EventEntityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TypeOfEvent = table.Column<int>(nullable: false),
+                    EventTitle = table.Column<string>(nullable: false),
+                    Information = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    StartTime = table.Column<string>(nullable: false),
+                    IsAssigned = table.Column<bool>(nullable: false),
+                    IsCompleted = table.Column<bool>(nullable: false),
+                    IsPaid = table.Column<bool>(nullable: false),
+                    IsExpired = table.Column<bool>(nullable: false),
+                    OwnerID = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
+                    JumperPersonEntityId = table.Column<int>(nullable: true),
+                    PersonEntityId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventTableAccess", x => x.EventEntityId);
+                    table.ForeignKey(
+                        name: "FK_EventTableAccess_PersonTableAccess_JumperPersonEntityId",
+                        column: x => x.JumperPersonEntityId,
+                        principalTable: "PersonTableAccess",
+                        principalColumn: "PersonEntityId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_EventTableAccess_PersonTableAccess_PersonEntityId",
+                        column: x => x.PersonEntityId,
+                        principalTable: "PersonTableAccess",
+                        principalColumn: "PersonEntityId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -268,6 +323,16 @@ namespace RedStarter.Database.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventTableAccess_JumperPersonEntityId",
+                table: "EventTableAccess",
+                column: "JumperPersonEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventTableAccess_PersonEntityId",
+                table: "EventTableAccess",
+                column: "PersonEntityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -300,6 +365,9 @@ namespace RedStarter.Database.Migrations
                 name: "EducationTableAccess");
 
             migrationBuilder.DropTable(
+                name: "EventTableAccess");
+
+            migrationBuilder.DropTable(
                 name: "ExperienceTableAccess");
 
             migrationBuilder.DropTable(
@@ -307,6 +375,9 @@ namespace RedStarter.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PersonTableAccess");
         }
     }
 }

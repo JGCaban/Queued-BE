@@ -10,8 +10,8 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20181217153941_initial")]
-    partial class initial
+    [Migration("20190115152912_userRoles")]
+    partial class userRoles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -181,6 +181,53 @@ namespace RedStarter.Database.Migrations
                     b.ToTable("ExperienceTableAccess");
                 });
 
+            modelBuilder.Entity("RedStarter.Database.Entities.Event.EventEntity", b =>
+                {
+                    b.Property<int>("EventEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<string>("EventTitle")
+                        .IsRequired();
+
+                    b.Property<string>("Information");
+
+                    b.Property<bool>("IsAssigned");
+
+                    b.Property<bool>("IsCompleted");
+
+                    b.Property<bool>("IsExpired");
+
+                    b.Property<bool>("IsPaid");
+
+                    b.Property<int?>("JumperPersonEntityId");
+
+                    b.Property<string>("Location")
+                        .IsRequired();
+
+                    b.Property<int>("OwnerID");
+
+                    b.Property<int?>("PersonEntityId");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("StartTime")
+                        .IsRequired();
+
+                    b.Property<string>("TypeOfEvent")
+                        .IsRequired();
+
+                    b.HasKey("EventEntityId");
+
+                    b.HasIndex("JumperPersonEntityId");
+
+                    b.HasIndex("PersonEntityId");
+
+                    b.ToTable("EventTableAccess");
+                });
+
             modelBuilder.Entity("RedStarter.Database.Entities.People.UserEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -231,6 +278,29 @@ namespace RedStarter.Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Entities.Person.PersonEntity", b =>
+                {
+                    b.Property<int>("PersonEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("Phone");
+
+                    b.HasKey("PersonEntityId");
+
+                    b.ToTable("PersonTableAccess");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.RoleEntity", b =>
@@ -301,6 +371,17 @@ namespace RedStarter.Database.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Entities.Event.EventEntity", b =>
+                {
+                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Jumper")
+                        .WithMany()
+                        .HasForeignKey("JumperPersonEntityId");
+
+                    b.HasOne("RedStarter.Database.Entities.Person.PersonEntity", "Placer")
+                        .WithMany()
+                        .HasForeignKey("PersonEntityId");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.UserRoleEntity", b =>

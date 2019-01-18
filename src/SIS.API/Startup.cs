@@ -15,16 +15,24 @@ using Microsoft.IdentityModel.Tokens;
 using RedStarter.API.MappingProfiles;
 using RedStarter.Business.DataContract.Application.Interfaces;
 using RedStarter.Business.DataContract.Authorization.Interfaces;
+using RedStarter.Business.DataContract.Event;
 using RedStarter.Business.Managers.Application;
 using RedStarter.Business.Managers.Authorization;
+using RedStarter.Business.Managers.Event;
+using RedStarter.Business.DataContract.Person;
+using RedStarter.Business.Managers.Person;
 using RedStarter.Database.Application;
 using RedStarter.Database.Authorization;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.Application;
 using RedStarter.Database.DataContract.Authorization.Interfaces;
+using RedStarter.Database.DataContract.Event;
 using RedStarter.Database.DataContract.Roles.Interfaces;
 using RedStarter.Database.Entities.People;
 using RedStarter.Database.Entities.Roles;
+using RedStarter.Database.Event;
+using RedStarter.Database.DataContract.Person;
+using RedStarter.Database.Person;
 using RedStarter.Database.Roles;
 using RedStarter.Database.SeedData;
 using Swashbuckle.AspNetCore.Swagger;
@@ -95,6 +103,8 @@ namespace RedStarter.API
             {
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new ApplicationMappingProfile());
+                mc.AddProfile(new EventMappingProfile());
+                mc.AddProfile(new PersonMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -107,6 +117,10 @@ namespace RedStarter.API
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IUserApplicationManager, UserApplicationManager>();
+            services.AddScoped<IEventManager, EventManager>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IPersonManager, PersonManager>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             //======= Swagger =======
             services.AddSwaggerGen(c =>
