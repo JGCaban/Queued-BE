@@ -2,6 +2,7 @@
 using RedStarter.Database.Entities.Person;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -23,10 +24,12 @@ namespace RedStarter.Database.Entities.Event
         public decimal Price { get; set; }
         [Required]
         public string StartTime { get; set; }
+
         public bool IsAssigned { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsPaid { get; set; }
         public bool IsExpired { get; set; }
+
         [Required]
         public int OwnerID { get; set; }
         [Required]
